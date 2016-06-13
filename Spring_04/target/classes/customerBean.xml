@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--自动搜索bean, bean的name自动根据类的名称将首字母小写取得-->
+    <!--<context:component-scan base-package="com.yiyi.comm"/>-->
+
+    <bean id="customer" class="com.yiyi.comm.Custormer" scope="prototype">
+        <!--定义一个bean内部的bean,只有该bean会使用,亦可使用property定义-->
+        <constructor-arg>
+            <bean class="com.yiyi.comm.Person">
+                <constructor-arg index="0" value="haha"/>
+                <constructor-arg index="1" value="19"/>
+                <!--<property name="name" value="hhaha"/>-->
+                <!--<property name="age" value="18"/>-->
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

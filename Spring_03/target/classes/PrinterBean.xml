@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <import resource="jsonBean.xml"/>
+    <!--同时使用property和constructor-arg注入, property优先级要高-->
+    <bean id="PrintHelper" class="com.yiyi.comm.out.PrintHelper">
+          <!--p:printer="" >-->
+        <!--<property name="printer" ref="json"/>-->
+        <!--<constructor-arg ref="json"/>-->
+        <property name="printer" ref="json"/>
+        <constructor-arg ref="json"/>
+    </bean>
+</beans>

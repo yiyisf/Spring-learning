@@ -1,0 +1,22 @@
+group 'com.yiyi.comm'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+
+
+dependencies {
+    providedCompile 'javax'
+
+}
+
+war{
+    archiveName 'root.war'
+}
