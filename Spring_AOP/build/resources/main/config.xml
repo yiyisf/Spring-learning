@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <aop:aspectj-autoproxy/>
+    <context:component-scan base-package="com.yiyi.spring.aspect"/>
+    <bean id="employeedao" class="com.yiyi.spring.dao.EmplyeeDaoImpl">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://54.199.214.10:3306/spring_db"/>
+        <property name="username" value="root"/>
+        <property name="password" value="password"/>
+    </bean>
+
+    <bean id="employee" class="com.yiyi.spring.model.Employee">
+        <property name="name" value="yiyi"/>
+    </bean>
+
+    <bean id="employeeservice" class="com.yiyi.spring.service.EmployeeService">
+        <property name="employee" ref="employee"/>
+    </bean>
+
+
+    <!--<bean id="employeeAspect" class="com.yiyi.spring.aspect.EmployeeAspect"/>-->
+
+    <!--配置AOP的bean-->
+    <bean id="employeeaspectjoinPoint" class="com.yiyi.spring.aspect.EmployeeAspectJoinPoint"/>
+
+    <!--配置AOP-->
+    <aop:config>
+        <aop:aspect id="joinargaspect" ref="employeeaspectjoinPoint" order="1">
+            <aop:pointcut id="join" expression="execution(public void com.yiyi.spring.model.*.set*(*))"/>
+            <aop:before method="loggingAdvice" pointcut-ref="join"/>
+        </aop:aspect>
+
+        <aop:aspect id="withargAspect" ref="employeeaspectjoinPoint" order="2">
+            <aop:pointcut id="args" expression="args(name)"/>
+            <aop:before method="logStringArguments" pointcut-ref="args"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
