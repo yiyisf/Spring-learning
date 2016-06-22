@@ -19,8 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Spring_05_main" target="1.8" />
-      <module name="Spring_05_test" target="1.8" />
+      <module name="Spring_06_main" target="1.8" />
+      <module name="Spring_06_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
